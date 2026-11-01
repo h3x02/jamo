@@ -11,6 +11,7 @@ const Cart = lazy(() => import('./pages/Cart'))
 const Checkout = lazy(() => import('./pages/Checkout'))
 const ProductPage = lazy(() => import('./pages/Product'))
 const Listing = lazy(() => import('./pages/Listing'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
 
 function Router() {
   const { path } = useRoute()
@@ -21,6 +22,7 @@ function Router() {
   if (m) return <ProductPage id={+m[1]} />
   if (path === '/cart') return <Cart />
   if (path === '/checkout') return <Checkout />
+  if (path.startsWith('/dashboard')) return <Dashboard sub={path.replace(/^\/dashboard\/?/, '')} />
   if (path.startsWith('/account')) return <Account sub={path.replace(/^\/account\/?/, '')} />
   return <Container><EmptyState icon="search" title="صفحه پیدا نشد" text="آدرسی که وارد کردید وجود ندارد." action={<Button onClick={() => navigate('/')}>بازگشت به خانه</Button>} /></Container>
 }
