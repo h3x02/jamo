@@ -1,0 +1,10 @@
+{
+  "description": "فروشگاه آنلاین جامو برای خرید آسان محصولات متنوع با جست‌وجو و فیلتر، پیشنهادهای ویژه، پرداخت امن و پیگیری سفارش در یک تجربه کاملاً فارسی.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
