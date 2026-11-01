@@ -39,7 +39,19 @@ export default function Auth() {
   const [left, setLeft] = useState(0)
   const [after, setAfter] = useState<'login' | 'register' | 'reset'>('login')
   useEffect(() => { if (left <= 0) return; const t = setTimeout(() => setLeft(left - 1), 1000); return () => clearTimeout(t) }, [left])
-  const finish = () => { login(enDigits(phone), name || undefined); toast('خوش آمدید به جامو'); navigate(query.get('next') || '/account') }
+  const finish = () => {
+    const cleanPhone = enDigits(phone)
+    login(cleanPhone, name || undefined)
+    toast('خوش آمدید به جامو')
+    const nextUrl = query.get('next')
+    if (nextUrl) {
+      navigate(nextUrl)
+    } else if (cleanPhone === '09104056429') {
+      navigate('/dashboard')
+    } else {
+      navigate('/account')
+    }
+  }
   const wait = (fn: () => void) => { setBusy(true); setTimeout(() => { setBusy(false); fn() }, 700) }
 
   const sendCode = (a: typeof after) => {
