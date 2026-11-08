@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Icon } from '../components/Icon'
 import { CartItem, Price, ProductGrid } from '../components/commerce'
-import { Button, Container, EmptyState, Input, Img } from '../components/ui'
+import { Button, Container, EmptyState, Input, Img, Modal } from '../components/ui'
 import { coupons, FREE_SHIP, getProduct, img, products } from '../lib/data'
 import { toFa } from '../lib/format'
 import { Link, navigate } from '../lib/router'
@@ -44,6 +44,7 @@ export function Summary({ cta }: { cta?: boolean }) {
 
 export default function Cart() {
   const { cart, saved, moveToCart, removeSaved, count, clearCart } = useStore()
+  const [confirmClear, setConfirmClear] = useState(false)
   const sug = products.filter((p) => p.stock > 0).sort((a, b) => b.sold - a.sold).slice(0, 4)
   return (
     <Container className="pb-4 pt-6">
@@ -53,10 +54,10 @@ export default function Cart() {
         </>
       ) : (
         <>
-          <div className="mb-5 flex items-center justify-between"><h1 className="text-xl font-bold md:text-2xl">سبد خرید <span className="text-base font-normal text-muted">({toFa(count)} کالا)</span></h1><button onClick={() => { clearCart() }} className="text-sm text-muted hover:text-sale">حذف همه</button></div>
+          <div className="mb-5 flex items-center justify-between"><h1 className="text-xl font-bold md:text-2xl">سبد خرید <span className="text-base font-normal text-muted">({toFa(count)} کالا)</span></h1><button onClick={() => setConfirmClear(true)} className="text-sm text-muted hover:text-sale">حذف همه</button></div>
           <div className="grid items-start gap-6 lg:grid-cols-[1fr_380px]">
             <div className="divide-y divide-line rounded-xl bg-white px-4 shadow-card ring-1 ring-line/60 md:px-5">{cart.map((l) => <CartItem key={l.key} line={l} />)}</div>
-            <div className="lg:sticky lg:top-32"><Summary cta /></div>
+            <div className="lg:sticky lg:top-40"><Summary cta /></div>
           </div>
         </>
       )}
@@ -74,6 +75,9 @@ export default function Cart() {
         </section>
       )}
       <section className="mt-14"><h2 className="mb-5 text-xl font-bold">{cart.length ? 'شاید این‌ها را هم بپسندید' : 'پیشنهاد ما برای شروع'}</h2><ProductGrid items={sug} /></section>
+      <Modal open={confirmClear} onClose={() => setConfirmClear(false)} title="حذف همه کالاها" footer={<div className="flex gap-3"><Button variant="danger" full onClick={() => { clearCart(); setConfirmClear(false) }}>حذف همه</Button><Button variant="secondary" full onClick={() => setConfirmClear(false)}>انصراف</Button></div>}>
+        <p className="text-sm leading-7 text-muted">آیا مطمئن هستید که می‌خواهید همه کالاهای سبد خرید را حذف کنید؟ این عمل قابل بازگشت نیست.</p>
+      </Modal>
     </Container>
   )
 }

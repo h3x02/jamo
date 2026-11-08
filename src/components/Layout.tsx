@@ -8,9 +8,14 @@ import { Icon } from './Icon'
 import { Container, Drawer, IconButton } from './ui'
 
 export const Logo = ({ light, className }: { light?: boolean; className?: string }) => (
-  <Link to="/" aria-label="جامو - صفحه اصلی" className={cn('inline-flex items-center gap-2 select-none', className)}>
-    <span className={cn('grid size-8 place-items-center rounded-lg text-lg font-extrabold leading-none', light ? 'bg-white text-brand-800' : 'bg-brand-700 text-white')}>ج</span>
-    <span className={cn('text-[26px] font-extrabold leading-none tracking-tight', light ? 'text-white' : 'text-brand-800')}>جامو</span>
+  <Link to="/" aria-label="جامو - صفحه اصلی" className={cn('inline-flex items-center select-none', className)}>
+    <img
+      src="/logo.png"
+      alt="جامو"
+      width={2056}
+      height={765}
+      className={cn('h-10 w-auto md:h-11', light && 'rounded-lg bg-white px-2 py-1.5')}
+    />
   </Link>
 )
 
@@ -21,7 +26,7 @@ function CartBadge() {
 }
 
 export function Header() {
-  const { path } = useRoute()
+  const { path, query } = useRoute()
   const { user, wishlist } = useStore()
   const [menu, setMenu] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -40,7 +45,11 @@ export function Header() {
         </Container>
       </header>
     )
-  const nav = [{ to: '/products', label: 'همه محصولات' }, ...categories.slice(0, 5).map((c) => ({ to: `/products?cat=${c.id}`, label: c.name })), { to: '/products?sort=discount', label: 'تخفیف‌ها', hot: true }]
+  const nav = [
+    { to: '/products', label: 'همه محصولات', current: path === '/products' && !query.get('cat') },
+    ...categories.slice(0, 5).map((c) => ({ to: `/products?cat=${c.id}`, label: c.name, current: path === '/products' && query.get('cat') === c.id })),
+    { to: '/products?sort=discount', label: 'تخفیف‌ها', hot: true, current: path === '/products' && query.get('sort') === 'discount' },
+  ]
   return (
     <header className={cn('sticky top-0 z-40 bg-white transition-shadow', scrolled && 'shadow-card')}>
       <div className="hidden bg-brand-800 py-1.5 text-center text-[13px] text-brand-50 md:block">ارسال رایگان برای خرید بالای {toFa(FREE_SHIP / 1000000)} میلیون تومان · ضمانت تازگی کالا</div>
@@ -58,7 +67,7 @@ export function Header() {
         <SearchBar className="pb-3 md:hidden" />
         <nav aria-label="دسته‌بندی‌ها" className="no-scrollbar hidden h-11 items-center gap-1 overflow-x-auto border-t border-line md:flex">
           {nav.map((n) => (
-            <Link key={n.to} to={n.to} className={cn('flex h-9 shrink-0 items-center rounded-lg px-3 text-sm font-medium hover:bg-sand', n.hot ? 'text-sale' : 'text-ink/80 hover:text-ink')}>{n.hot && <Icon name="tag" size={15} className="me-1.5" />}{n.label}</Link>
+            <Link key={n.to} to={n.to} aria-current={n.current ? 'page' : undefined} className={cn('flex h-9 shrink-0 items-center rounded-lg px-3 text-sm font-medium', n.current ? 'bg-brand-50 text-brand-800' : n.hot ? 'text-sale hover:bg-sand' : 'text-ink/80 hover:bg-sand hover:text-ink')}>{n.hot && <Icon name="tag" size={15} className="me-1.5" />}{n.label}</Link>
           ))}
         </nav>
       </Container>

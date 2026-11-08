@@ -22,7 +22,7 @@ export default function Account({ sub }: { sub: string }) {
     <Container className="pb-4">
       <Breadcrumb items={[{ label: 'جامو', to: '/' }, { label: 'حساب کاربری', to: section ? '/account' : undefined }, ...(section ? [{ label: nav.find((n) => n[0] === path)?.[2] ?? '' }] : [])]} />
       <div className="grid items-start gap-6 lg:grid-cols-[260px_1fr]">
-        <aside className="lg:sticky lg:top-32">
+        <aside className="lg:sticky lg:top-40">
           <div className="hidden items-center gap-3 rounded-xl bg-white p-4 ring-1 ring-line/60 lg:flex"><span className="grid size-12 place-items-center rounded-full bg-brand-700 text-lg font-bold text-white">{user.name[0]}</span><div><p className="font-bold">{user.name}</p><p className="text-sm text-muted tabular-nums">{user.phone}</p></div></div>
           <nav aria-label="حساب کاربری" className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 lg:mx-0 lg:mt-3 lg:flex-col lg:gap-1 lg:rounded-xl lg:bg-white lg:p-2 lg:ring-1 lg:ring-line/60">
             {nav.map(([to, ic, l]) => <Link key={to} to={to} aria-current={path === to ? 'page' : undefined} className={cn('flex h-11 shrink-0 items-center gap-2.5 rounded-lg px-4 text-sm font-medium', path === to ? 'bg-brand-700 text-white lg:bg-brand-50 lg:text-brand-800' : 'bg-white ring-1 ring-line/60 hover:bg-sand lg:bg-transparent lg:ring-0')}><Icon name={ic} size={18} />{l}</Link>)}

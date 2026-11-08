@@ -103,7 +103,6 @@ function CustomerDashboard() {
           </div>
         </div>
         <div className="mt-6 flex justify-center gap-3">
-          <Button onClick={() => navigate('/account/orders')}>مشاهده سفارش‌ها</Button>
           <Button variant="secondary" onClick={() => navigate('/')}>بازگشت به فروشگاه</Button>
         </div>
       </div>
@@ -132,9 +131,7 @@ function SuperadminView({ activeTab }: { activeTab: AdminTab }) {
       <div className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur-md">
         <Container className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="grid size-9 place-items-center rounded-xl bg-emerald-700 text-white font-extrabold text-base shadow-sm">
-              ج
-            </span>
+            <img src="/logo.png" alt="جامو" width={2056} height={765} className="h-9 w-auto" />
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-base font-extrabold text-slate-900">پنل سوپرادمین جامو</h1>
@@ -142,7 +139,7 @@ function SuperadminView({ activeTab }: { activeTab: AdminTab }) {
                   مدیر کل
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400">شماره مدیر: {toFa(user?.phone ?? '')}</p>
+              <p className="text-[11px] text-slate-400">شماره مدیر: {user?.phone}</p>
             </div>
           </div>
 
@@ -1114,7 +1111,7 @@ function AdminCategoriesTab() {
               />
               <div className="flex-1 min-w-0">
                 <h3 className="font-bold text-slate-900 truncate">{c.name}</h3>
-                <p className="text-xs text-slate-400 font-mono mt-0.5">slug: {c.id}</p>
+                <p className="text-xs text-slate-400 mt-0.5">slug: {c.id}</p>
                 <p className="text-xs text-emerald-700 font-semibold mt-1">
                   {toFa(prodsInCat.length)} محصول فعال
                 </p>
@@ -1363,7 +1360,7 @@ function AdminDiscountsTab() {
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-base font-extrabold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+                  <span className="text-base font-extrabold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
                     {code}
                   </span>
                   <button
@@ -1589,7 +1586,7 @@ function AdminLiveTransactionsTab() {
                   )}
                 >
                   <td className="py-3 px-4">
-                    <span className="font-mono font-bold text-slate-900">{o.id}</span>
+                    <span className="font-bold text-slate-900">{o.id}</span>
                   </td>
                   <td className="py-3 px-4 font-semibold text-slate-800">{o.address.name}</td>
                   <td className="py-3 px-4 tabular-nums text-slate-500">{toFa(o.address.phone)}</td>
@@ -1706,7 +1703,7 @@ function AdminLiveTransactionsTab() {
                   <tbody className="divide-y divide-slate-100">
                     {allFiltered.map((o) => (
                       <tr key={o.id} className="hover:bg-slate-50">
-                        <td className="py-2.5 px-3 font-mono font-bold text-slate-900">{o.id}</td>
+                        <td className="py-2.5 px-3 font-bold text-slate-900">{o.id}</td>
                         <td className="py-2.5 px-3 font-semibold">{o.address.name}</td>
                         <td className="py-2.5 px-3 tabular-nums">{toFa(o.address.phone)}</td>
                         <td className="py-2.5 px-3 text-slate-500 max-w-[200px] truncate">

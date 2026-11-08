@@ -36,7 +36,7 @@ export default function ProductPage({ id }: { id: number }) {
       <Breadcrumb items={[{ label: 'جامو', to: '/' }, { label: catName(p.cat), to: `/products?cat=${p.cat}` }, { label: p.name }]} />
       <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
         {/* Gallery */}
-        <div className="flex flex-col-reverse gap-3 md:flex-row lg:sticky lg:top-32 lg:self-start">
+        <div className="flex flex-col-reverse gap-3 md:flex-row lg:sticky lg:top-40 lg:self-start">
           <div className="flex gap-2 md:flex-col">
             {p.images.map((im, i) => (
               <button key={i} aria-label={`تصویر ${toFa(i + 1)}`} aria-current={i === active} onClick={() => setActive(i)} className={cn('size-16 overflow-hidden rounded-lg ring-2 transition md:size-20', i === active ? 'ring-brand-600' : 'ring-transparent opacity-70 hover:opacity-100')}><Img src={img(im, 200)} alt="" className="size-full" /></button>
@@ -101,7 +101,7 @@ export default function ProductPage({ id }: { id: number }) {
       </div>
 
       {/* Tabs */}
-      <section id="tabs" className="mt-14 scroll-mt-32">
+      <section id="tabs" className="mt-14 scroll-mt-40">
         <div role="tablist" className="no-scrollbar flex gap-1 overflow-x-auto border-b border-line">
           {([['desc', 'توضیحات'], ['specs', 'مشخصات'], ['reviews', `دیدگاه‌ها (${toFa(p.reviews)})`]] as const).map(([k, l]) => (
             <button key={k} role="tab" aria-selected={tab === k} onClick={() => setTab(k)} className={cn('relative h-12 shrink-0 px-5 text-[15px] font-semibold transition-colors', tab === k ? 'text-brand-700' : 'text-muted hover:text-ink')}>{l}{tab === k && <span className="absolute inset-x-0 -bottom-px h-0.5 bg-brand-700" />}</button>

@@ -35,6 +35,7 @@ export default function Home() {
   const best = [...products].sort((a, b) => b.sold - a.sold).slice(0, 4)
   const latest = [...products].sort((a, b) => a.added - b.added).slice(0, 4)
   const featured = [...products].sort((a, b) => b.rating * Math.log(b.reviews) - a.rating * Math.log(a.reviews)).slice(0, 8)
+  const goOffers = () => document.getElementById('offers')?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' })
   return (
     <div className="space-y-14 pb-4 md:space-y-20">
       {/* Hero */}
@@ -47,7 +48,7 @@ export default function Home() {
               <p className="max-w-md text-[15px] leading-8 text-brand-100 md:text-base">میوه و سبزی تازه، لبنیات، خواروبار، خشکبار و شوینده؛ همه در یک سفارش و با ارسال سریع تا درِ منزل.</p>
               <div className="flex flex-wrap gap-3 pt-1">
                 <Button variant="light" size="lg" onClick={() => navigate('/products')}>مشاهده محصولات<Icon name="next" size={18} /></Button>
-                <Button size="lg" className="bg-white/10 hover:bg-white/20" onClick={() => navigate('/products?sort=discount')}>پیشنهادهای ویژه</Button>
+                <Button size="lg" className="bg-white/10 hover:bg-white/20" onClick={goOffers}>پیشنهادهای ویژه</Button>
               </div>
             </div>
             <div className="relative order-first h-56 md:order-none md:h-auto">
@@ -62,6 +63,16 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* Offers — first thing after the hero */}
+      <section id="offers" className="scroll-mt-40 bg-brand-900 py-10 md:py-14"><Container>
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-4 text-white">
+          <div><h2 className="text-xl font-bold md:text-2xl">پیشنهادهای ویژه امروز</h2><p className="mt-0.5 text-sm text-brand-200">تخفیف روی کالاهای پرمصرف، تا پایان زمان مشخص‌شده</p></div>
+          <Countdown />
+        </div>
+        <ProductGrid items={offers} loading={loading} />
+        <div className="mt-6 text-center"><Button variant="light" onClick={() => navigate('/products?sort=discount')}>مشاهده همه تخفیف‌ها</Button></div>
+      </Container></section>
+
       {/* Categories */}
       <section>
         <Container>
@@ -74,16 +85,6 @@ export default function Home() {
       <section><Container>
         <SectionHead title="محصولات منتخب" sub="محبوب‌ترین‌ها از نگاه مشتریان جامو" to="/products" />
         <ProductGrid items={featured} loading={loading} />
-      </Container></section>
-
-      {/* Offers */}
-      <section className="bg-brand-900 py-10 md:py-14"><Container>
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-4 text-white">
-          <div><h2 className="text-xl font-bold md:text-2xl">پیشنهادهای ویژه امروز</h2><p className="mt-0.5 text-sm text-brand-200">تخفیف روی کالاهای پرمصرف، تا پایان زمان مشخص‌شده</p></div>
-          <Countdown />
-        </div>
-        <ProductGrid items={offers} loading={loading} />
-        <div className="mt-6 text-center"><Button variant="light" onClick={() => navigate('/products?sort=discount')}>مشاهده همه تخفیف‌ها</Button></div>
       </Container></section>
 
       {/* Best sellers + promo */}

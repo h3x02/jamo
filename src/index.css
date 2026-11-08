@@ -1,8 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
 @import 'tailwindcss';
 
+@font-face {
+  font-family: 'Normal Sans';
+  src: url('/fonts/normalSans.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: 'Vazirmatn', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Normal Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --color-brand-50: #eef6f4;
   --color-brand-100: #d6e9e4;
   --color-brand-200: #aed3ca;

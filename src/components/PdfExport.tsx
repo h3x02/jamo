@@ -38,9 +38,7 @@ export function PdfDocument({ title, subtitle, date, children }: PdfDocumentProp
       <div className="border-b border-slate-200 pb-5 mb-6 flex items-start justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <span className="grid size-8 place-items-center rounded-lg bg-emerald-700 text-white font-extrabold text-sm">
-              ج
-            </span>
+            <img src="/logo.png" alt="جامو" width={2056} height={765} className="h-8 w-auto" />
             <span className="text-xl font-black text-slate-900">سامانه مدیریت جامو</span>
           </div>
           <h1 className="text-2xl font-bold text-slate-900 mt-2">{title}</h1>
@@ -59,7 +57,7 @@ export function PdfDocument({ title, subtitle, date, children }: PdfDocumentProp
 
       {/* Footer */}
       <div className="border-t border-slate-200 pt-4 mt-8 flex items-center justify-between text-[11px] text-slate-400">
-        <span>گزارش رسمی سوپراپ جامو (pdfcn.dev report engine)</span>
+        <span>گزارش رسمی سوپراپ جامو</span>
         <span>صفحه ۱ از ۱</span>
       </div>
     </div>
@@ -192,11 +190,13 @@ export function PdfExportButton({
       <html dir="rtl" lang="fa">
       <head>
         <meta charset="utf-8" />
+        <base href="${window.location.origin}/" />
         <title>${documentTitle}</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
+          @font-face { font-family: 'Normal Sans'; src: url('${window.location.origin}/fonts/normalSans.ttf') format('truetype'); font-weight: normal; font-style: normal; }
           @page { size: A4 portrait; margin: 12mm; }
-          body { font-family: system-ui, -apple-system, 'Vazirmatn', sans-serif; background: #fff; }
+          body { font-family: 'Normal Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; background: #fff; }
         </style>
       </head>
       <body class="p-4">
@@ -222,7 +222,7 @@ export function PdfExportButton({
         className="flex items-center gap-2 border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold shadow-sm"
       >
         <Icon name="download" size={16} />
-        خروجی گزارش PDF (pdfcn)
+        خروجی گزارش PDF
       </Button>
 
       {open && (
@@ -231,9 +231,9 @@ export function PdfExportButton({
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-4 rounded-t-2xl">
               <div>
-                <h3 className="text-lg font-bold text-slate-900">پیش‌نمایش سند PDF (pdfcn)</h3>
+                <h3 className="text-lg font-bold text-slate-900">پیش‌نمایش سند PDF</h3>
                 <p className="text-xs text-slate-500">
-                  فرمت گزارش استاندارد با کامپوننت‌های فرمت شده shadcn / pdfcn
+                  فرمت گزارش استاندارد با کامپوننت‌های فرمت شده
                 </p>
               </div>
               <div className="flex items-center gap-2">

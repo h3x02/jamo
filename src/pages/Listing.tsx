@@ -50,13 +50,13 @@ export default function Listing() {
     <Container className="pb-4">
       <Breadcrumb items={[{ label: 'جامو', to: '/' }, { label: 'محصولات', to: f.cat || q ? '/products' : undefined }, ...(f.cat ? [{ label: catName(f.cat) }] : [])]} />
       <div className="flex gap-8">
-        <aside className="hidden w-64 shrink-0 lg:block"><div className="sticky top-32 rounded-xl bg-white p-5 shadow-card ring-1 ring-line/60"><FilterPanel f={f} onChange={change} onReset={reset} /></div></aside>
+        <aside className="hidden w-64 shrink-0 lg:block"><div className="sticky top-40 rounded-xl bg-white p-5 shadow-card ring-1 ring-line/60"><FilterPanel f={f} onChange={change} onReset={reset} /></div></aside>
         <div className="min-w-0 flex-1">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <div><h1 className="text-xl font-bold md:text-2xl">{title}</h1><p className="text-sm text-muted">{toFa(items.length)} کالا</p></div>
             <div className="flex items-center gap-2">
               <Button variant="secondary" className="lg:hidden" onClick={() => setSheet(true)}><Icon name="sliders" size={18} />فیلترها{active > 0 && <span className="grid size-5 place-items-center rounded-full bg-brand-700 text-[11px] text-white">{toFa(active)}</span>}</Button>
-              <div className="w-40 md:w-48"><Select aria-label="مرتب‌سازی" value={sort} onChange={(e) => setSort(e.target.value)}>{Object.entries(sorts).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</Select></div>
+              <div className="w-40 md:w-48"><Select aria-label="مرتب‌سازی" value={sort} onChange={(e) => { setSort(e.target.value); setPage(1) }}>{Object.entries(sorts).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</Select></div>
               <div className="hidden rounded-lg bg-white p-1 ring-1 ring-inset ring-line sm:flex" role="group" aria-label="نحوه نمایش">
                 {(['grid', 'list'] as const).map((v) => <button key={v} aria-label={v === 'grid' ? 'نمایش شبکه‌ای' : 'نمایش لیستی'} aria-pressed={view === v} onClick={() => setView(v)} className={cn('grid size-9 place-items-center rounded-md', view === v ? 'bg-brand-700 text-white' : 'text-muted hover:bg-sand')}><Icon name={v} size={18} /></button>)}
               </div>
